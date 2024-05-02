@@ -2,7 +2,23 @@ replit: https://replit.com/@kxste/aya10
 
 Руководство по инициализации приложения
 1. Установка окружения. На Вашем сервере должны быть установлены PHP и SQLite3.
-2. Подготовка базы данных. Скачайте базу данных "database.sqlite3" из репозитория. 
+2. Подготовка базы данных. Скачайте базу данных "database.sqlite3" из репозитория. Можете создать новый с таким же названием. Вставтье следующий скрипт:
+CREATE TABLE IF NOT EXISTS events (
+    event_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    date TEXT NOT NULL,
+    price REAL NOT NULL,
+    total_tickets INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS orders (
+    order_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    full_name TEXT NOT NULL,
+    event_id INTEGER NOT NULL,
+    event_name TEXT NOT NULL,
+    event_ticket_price REAL NOT NULL,
+    FOREIGN KEY (event_id) REFERENCES events (event_id)
+);
 3. Запуск веб-приложения. Загрузите все файлы с кодом из репозитория на Ваш сервер: "booking.php, database.sqlite3, homepage.php, styles.css". После этого вы можете открыть приложение в браузере, перейдя по URL-адресу файла.
 4. Использование приложения. На homepage Вы можете увидеть все события и их описание. Для бронирования перейдите на страницу booking. Выберите заинтересовавшее событие из выпадающего списка, введите свое полное имя и нажмите кнопку "Купить билет". Если билеты на выбранное событие доступны, вы получите сообщение об успешной покупке. В противном случае вы увидите сообщение о том, что билеты распроданы.
 
